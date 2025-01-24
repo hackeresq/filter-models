@@ -1,0 +1,20 @@
+{
+    "name": "hackeresq/filter-models",
+    "description": "Simple package to filter your Laravel models with query parameters",
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^11.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "HackerEsq\\FilterModels\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "HackerEsq\\FilterModels\\FilterModelsServiceProvider"
+            ]
+        }
+    }
+}

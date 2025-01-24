@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Filters;
+namespace HackerEsq\FilterModels;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
-class FilterRequest
+class FilterModels
 {
     public Builder $query;
     public array $searchableColumns;
@@ -17,6 +17,11 @@ class FilterRequest
     public array $scopes;
     public array $select = [];
     public int $itemsPerPage = 15;
+
+    public function setQuery(Builder $query): void
+    {
+        $this->query = $query;
+    }
 
     /**
      * Sets eager loads on the underlying query

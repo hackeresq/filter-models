@@ -128,7 +128,7 @@ class FilterModels
         $this->itemsPerPage = $itemsPerPage;
     }
 
-    public function buildQuery()
+    public function buildQuery(): void
     {
         // handle sort 
         if (request()->has('sortBy')) {
@@ -200,7 +200,7 @@ class FilterModels
             });
         }
 
-        return $this->query->addSelect($this->select);
+        $this->query = $this->query->addSelect($this->select);
     }
 
     /**
@@ -210,6 +210,7 @@ class FilterModels
      */
     public function get(): Collection
     {
+        $this->buildQuery();
 
         // run
         return $this->query->get();
@@ -222,6 +223,7 @@ class FilterModels
      */
     public function paginated(): LengthAwarePaginator
     {
+        $this->buildQuery();
 
         // handle per page
         if (request()->query('itemsPerPage') == "-1") {

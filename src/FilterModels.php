@@ -136,6 +136,7 @@ class FilterModels
             if (Str::contains(request()->query('sortBy'), '.')) {
                 $this->query->joinRelation(Str::before(request()->query('sortBy'), '.'));
             } 
+            
             $this->query->orderBy(
                 request()->query('sortBy'), 
                 request()->query('sortDesc', false) == "true" ? 'DESC' : 'ASC'
@@ -147,21 +148,22 @@ class FilterModels
 
             foreach(request()->query('filter') as $filter => $params) {
 
-                if (array_key_exists($filter, $this->filterableRelations)) {
+                foreach(explode(',', $params ?? '') as $param) { 
 
-                    // filtered rx
-                    foreach(explode(',', $params) as $param) { 
+                    $param = $this->convertToNative($param);
+
+                    if (array_key_exists($filter, $this->filterableRelations)) {
+                        // filtered rx
+
                         $this->query->whereHas($filter, function ($query) use ($filter, $param) {
                             $query->where($this->filterableRelations[$filter], $param);
                         }); 
-                    }
 
-                } else {
-                    // traditional filter
-                    foreach(explode(',', $params) as $param) { 
+                    } else {
+                        // traditional filter
+
                         $this->query->having($filter, $param); 
                     }
-
                 }
             }
         }
@@ -200,7 +202,8 @@ class FilterModels
             });
         }
 
-        $this->query = $this->query->addSelect($this->select);
+        // handle add to the select query
+        $this->query->addSelect($this->select);
     }
 
     /**
@@ -234,5 +237,21 @@ class FilterModels
 
         // run
         return $this->query->paginate($perPage);
+    }
+
+    public function convertToNative(string $param): mixed
+    {
+
+        if ($param == 'true') {
+            $param = true;
+        } elseif ($param == 'false') {
+            $param = false;
+        } elseif ($param == 'null') {
+            $param = null;
+        } elseif (is_numeric($param)) {
+            $param = (int) $param;
+        }
+
+        return $param;
     }
 }

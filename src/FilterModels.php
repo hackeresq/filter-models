@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace HackerEsq\FilterModels;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 
 class FilterModels
 {
@@ -128,6 +128,23 @@ class FilterModels
         $this->itemsPerPage = $itemsPerPage;
     }
 
+    public function relationshipFilter(string $filter, mixed $param): void
+    {
+        $this->query->whereHas(Str::before($filter, '.'), function($query) use ($filter, $param) {
+
+            $suffix = Str::after($filter, '.');
+
+            if (str_contains($suffix, '.')) {
+
+                $this->relationshipFilter($suffix, $param);
+
+            } else {
+
+                $query->where($suffix, $param);
+            }
+        });
+    }
+
     public function buildQuery(): void
     {
         // handle sort 
@@ -151,19 +168,19 @@ class FilterModels
                 foreach(explode(',', $params ?? '') as $param) { 
 
                     $param = $this->convertToNative($param);
-
-                    if (array_key_exists($filter, $this->filterableRelations)) {
+                    
+                    if (array_key_exists($filter, array_flip($this->filterableRelations))) {
                         // filtered rx
-
-                        $this->query->whereHas($filter, function ($query) use ($filter, $param) {
-                            $query->where($this->filterableRelations[$filter], $param);
-                        }); 
+                    
+                        $this->relationshipFilter($filter, $param);
 
                     } else {
                         // traditional filter
 
                         $this->query->having($filter, $param); 
                     }
+
+                    
                 }
             }
         }

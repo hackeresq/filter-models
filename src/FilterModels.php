@@ -18,6 +18,16 @@ class FilterModels
     public array $select = [];
     public int $itemsPerPage = 15;
 
+    public function __construct() {
+        
+        $this->apply();
+    }
+
+    public function setModel(string $model): void
+    {
+        $this->query = (new $model)->query();
+    }
+
     public function setQuery(Builder $query): void
     {
         $this->query = $query;
@@ -179,8 +189,6 @@ class FilterModels
 
                         $this->query->having($filter, $param); 
                     }
-
-                    
                 }
             }
         }
@@ -251,7 +259,7 @@ class FilterModels
         } else {
             $perPage = request()->query('itemsPerPage', $this->itemsPerPage);
         }
-
+        
         // run
         return $this->query->paginate($perPage);
     }
@@ -278,5 +286,10 @@ class FilterModels
         }
 
         return $param;
+    }
+
+    public function apply(): void
+    {
+        // implement in child class
     }
 }

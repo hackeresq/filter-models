@@ -243,13 +243,21 @@ class FilterModels
     {
 
         if ($param == 'true') {
+            
             $param = true;
+            
         } elseif ($param == 'false') {
+            
             $param = false;
+            
         } elseif ($param == 'null') {
+            
             $param = null;
+            
         } elseif (is_numeric($param)) {
+            
             $param = (int) $param;
+            
         }
 
         return $param;

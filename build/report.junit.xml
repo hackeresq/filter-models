@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/phpunit.xml.dist" tests="2" assertions="1" errors="1" failures="0" skipped="0" time="0.055128">
+    <testsuite name="HackerESQ Test Suite" tests="2" assertions="1" errors="1" failures="0" skipped="0" time="0.055128">
+      <testsuite name="HackerESQ\FilterModels\Tests\FilterModelsTest" file="/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/tests/FilterModelsTest.php" tests="2" assertions="1" errors="1" failures="0" skipped="0" time="0.055128">
+        <testcase name="it_can_set_the_query_property" file="/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/tests/FilterModelsTest.php" line="25" class="HackerESQ\FilterModels\Tests\FilterModelsTest" classname="HackerESQ.FilterModels.Tests.FilterModelsTest" assertions="1" time="0.043430"/>
+        <testcase name="it_can_set_the_scopes_property" file="/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/tests/FilterModelsTest.php" line="35" class="HackerESQ\FilterModels\Tests\FilterModelsTest" classname="HackerESQ.FilterModels.Tests.FilterModelsTest" assertions="0" time="0.011698">
+          <error type="Illuminate\Database\QueryException">HackerESQ\FilterModels\Tests\FilterModelsTest::it_can_set_the_scopes_property
+Illuminate\Database\QueryException: SQLSTATE[HY000]: General error: 1 no such table: test_models (Connection: testing, SQL: select * from "test_models" where "test" = test)
+
+/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/vendor/laravel/framework/src/Illuminate/Database/Connection.php:779
+/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/vendor/laravel/framework/src/Illuminate/Database/Connection.php:398
+/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:3133
+/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:3118
+/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:3706
+/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:3117
+/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:787
+/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:769
+/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/src/FilterModels.php:249
+/Users/coreyvarma/investbrain/packages/hackeresq/filter-models/tests/FilterModelsTest.php:45</error>
+        </testcase>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

@@ -33,6 +33,11 @@ class FilterModels
         $this->query = $query;
     }
 
+    public function getQuery(): Builder
+    {
+        return $this->query;
+    }
+
     /**
      * Sets eager loads on the underlying query
      *

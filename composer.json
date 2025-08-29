@@ -3,10 +3,10 @@
     "description": "Simple package to filter your Laravel models with query parameters",
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^11.0|^12.0"
+        "laravel/framework": "^11.0||^12.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.0|^11.0",
+        "phpunit/phpunit": "^10.0||^11.0",
         "orchestra/testbench": "^9.9"
     },
     "autoload": {
